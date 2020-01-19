@@ -37,13 +37,13 @@ From the Rival-310 we can deduce that:
 
 Address | Register | Description | Access (R/W/RW) | Default Value
 :---: | :---: | :---: | :---: | :---:
-0x00 |  |  |  | 
+0x00 | Product_ID | Unique identification, value does not change, used to verify if serial comunication link is funcional | R | 0x42
 0x01 |  |  |  | 
-0x02 |  |  |  | 
-0x03 |  |  |  | 
-0x04 |  |  |  | 
-0x05 |  |  |  | 
-0x06 |  |  |  | 
+0x02 | Motion |  | RW | 0x20
+0x03 | Delta_X_L |  | R | 0x00
+0x04 | Delta_X_H |  | R | 0x00
+0x05 | Delta_Y_L |  | R | 0x00
+0x06 | Delta_Y_H |  | R | 0x00
 0x07 |  |  |  | 
 0x08 |  |  |  | 
 0x09 |  |  |  | 
@@ -73,7 +73,7 @@ Address | Register | Description | Access (R/W/RW) | Default Value
 0x2B |  |  |  | 
 0x2C |  |  |  | 
 0x2F |  |  |  | 
-0x3A |  |  |  | 
+0x3A | Power_Up_Reset |  | W | N/A
 0x3B |  |  |  | 
 0x3F |  |  |  | 
 0x41 |  |  |  | 
@@ -86,3 +86,53 @@ Address | Register | Description | Access (R/W/RW) | Default Value
 0x63 |  |  |  | 
 0x64 |  |  |  | 
 0x65 |  |  |  | 
+
+### Rival-310 startup sequence
+```
+Write 0x5A to 0x3A
+
+60ms delay
+
+Read 0x02
+Read 0x03
+Read 0x04
+Read 0x05
+Read 0x06
+Read 0x00
+Read 0x10
+Write 0x00 to 0x10
+Write 0x1D to 0x13
+
+15ms delay
+
+Write 0x18 to 0x13
+
+Write 0x62
+Write SROM Image
+
+Read 0x2A
+Write 0x15 to 0x13
+
+15ms delay
+
+Read 0x26
+Read 0x25
+Read 0x24
+Write 0x00 to 0x10
+Write 0x01 to 0x50
+
+500ms delay
+
+Write 0x01 to 0x50
+Read 6B from 0x50 (Motion Burst)
+
+Write 0x00 to 0x24
+Write 0x01 to 0x0F
+
+Write 0x01 to 0x50
+Read 6B from 0x50 (Motion Burst)
+
+normal operation...
+(Reads 0x00 every 1000ms)
+(Reads 'motion burst' on motion falling down)
+```
