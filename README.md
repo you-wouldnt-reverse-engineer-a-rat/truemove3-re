@@ -89,7 +89,7 @@ Address | Register | Description | Access (R/W/RW) | Default Value
 
 ### Rival-310 startup sequence
 ```
-Write 0x5A to 0x3A
+Write 0x5A to 0x3A (software reset)
 
 60ms delay
 
@@ -100,36 +100,36 @@ Read 0x05
 Read 0x06
 Read 0x00
 Read 0x10
-Write 0x00 to 0x10
-Write 0x1D to 0x13
+Write 0x00 to 0x10 (Clear REST mode enable bit)
+Write 0x1D to 0x13 (initializing SROM download)
 
 15ms delay
 
-Write 0x18 to 0x13
+Write 0x18 to 0x13 (start SROM download)
 
-Write 0x62
+Write 0x62 (SROM Load burst)
 Write SROM Image
 
-Read 0x2A
-Write 0x15 to 0x13
+Read 0x2A (Read SROM ID)
+Write 0x15 to 0x13 (SROM CRC check initialization)
 
 15ms delay
 
-Read 0x26
-Read 0x25
-Read 0x24
-Write 0x00 to 0x10
-Write 0x01 to 0x50
+Read 0x26 (CRC upper)
+Read 0x25 (CRC lower)
+Read 0x24 (Check SROM running bit?)
+Write 0x00 to 0x10 (Clear REST mode enable bit)
+Write 0x01 to 0x50 (initialize motion burst)
 
 500ms delay
 
-Write 0x01 to 0x50
-Read 6B from 0x50 (Motion Burst)
+Write 0x01 to 0x50 (initialize motion burst)
+Read 6B from 0x50 (read motion Burst)
 
-Write 0x00 to 0x24
-Write 0x01 to 0x0F
+Write 0x00 to 0x24 (Clear observation register)
+Write 0x01 to 0x0F (Set CPI)
 
-Write 0x01 to 0x50
+Write 0x01 to 0x50 (initialize motion burst)
 Read 6B from 0x50 (Motion Burst)
 
 normal operation...
