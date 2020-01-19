@@ -1,7 +1,32 @@
 # truemove3-re
+
 reverse engineering of the truemove3 sensor used by rival gaming mice developed by pixart
 
+### Pin Configuration
+
+The pinout of the truemove3 is afawk identical to the PMW3360
+
+Pin no. | Funcion | Symbol | Type | Description
+:---: | :---: | :---: | :---: | :---:
+1 | NA | NC | NC | (Float)
+2 | NA | NC | NC | (Float)
+3 | Supply | VDDPIX | Power | LDO output for selective analog circuit
+4 | Supply | VDD | Power | Input power supply
+5 | Supply | VDDIO | Power | I/O Reference voltage
+6 | NA | NC | NC | (Float)
+7 | Reset | NRESET | Input | Chip reset(active low)
+8 | Ground | GND | GND | Ground
+9 | Motion | MOTION | Output | Motion Detect
+10 | 4w. SPI | SCLK | Input | Serial data clock
+11 | 4w. SPI | MOSI | Input | Serial data input
+12 | 4w. SPI | MISO | Output | Serial data output
+13 | 4w. SPI | NCS | Input | Chip select(active low)
+14 | NA | NC | NC | (Float)
+15 | LED | LED_P | Input | LED Anode
+16 | NA | NC | NC | (Float)
+
 ### Interface
+
 The sensor uses SPI as it's communication interface.
 From the Rival-310 we can deduce that:
 - 1.2MHz (at least)
