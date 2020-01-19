@@ -2,6 +2,9 @@
 
 reverse engineering of the truemove3 sensor used by rival gaming mice developed by pixart
 
+it has now become clear that the truemove3 sensor is heavily based on the PMW3360, they appear to have the same register map.
+it is unclear what additional features pixart included in this version of the chip, and what behaves differently from the PMW3360
+
 ### Pin Configuration
 
 The pinout of the truemove3 is afawk identical to the PMW3360
