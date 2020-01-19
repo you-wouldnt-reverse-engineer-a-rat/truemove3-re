@@ -1,6 +1,13 @@
 # truemove3-re
 reverse engineering of the truemove3 sensor used by rival gaming mice developed by pixart
 
+### Interface
+The sensor uses SPI as it's communication interface.
+From the Rival-310 we can deduce that:
+- 1.2MHz (at least)
+- MODE 3 (cpol = 1; cpha = 1)
+- Chip-Select active-low
+
 ### Registers
 
 Address | Register | Description | Access (R/W/RW) | Default Value
