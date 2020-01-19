@@ -56,7 +56,7 @@ Address | Register | Description | Access (R/W/RW) | Default Value
 0x50 | Motion_Burst |  | RW | 0x00 
 0x62 | SROM_load_Burst |  | W | N/A
 
-### Rival-310 startup sequence
+### startup sequence (obtained from a Rival-310)
 ```
 Write 0x5A to 0x3A (software reset)
 
